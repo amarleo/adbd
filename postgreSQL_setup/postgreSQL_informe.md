@@ -1,10 +1,23 @@
 # INFORME: "Introducción a PostgreSQL"
 
+## INDICE
+
+1. [Introducción](#introducción)
+2. [Uso de comandos útiles](#uso-de-comandos-útiles)  
+    2.1. [Creación de un usuario](#creación-de-un-usuario)  
+    2.2. [Creación de Bases de datos y tablas](#creación-de-bases-de-datos-y-tablas)  
+    2.3. [Otros comandos útiles](#otros-comandos-útiles)
+1. [Ejemplo de pruebas](#ejemplo-de-pruebas)
+4. [Referencias](#referencias)
+***
 ## Introducción
+***
 
 **PostgreSQL** es un sistema de gestión de bases de datos relacional orientado a objetos. Se trata de un programa *open source*, contando con una comunidad de desarrolladores que trabajan en mejorar el programa de forma desinteresada. Tiene su origen en el año 1982, siendo este proyecto liderado por [Michael Stonebraker](https://es.wikipedia.org/wiki/Michael_Stonebraker). 
 
+***
 ## Instalación y acceso
+***
 
 A continuación, se procederá a detallar todos los pasos llevados a cabo para realizar la instalación de PostgreSQL. En este caso, se hará uso de una Máquina Virtual, proporcionada por el [IaaS](https://iaas.ull.es) de la ULL.
 
@@ -28,12 +41,15 @@ Sustituyendo en el comando anterior el parámetro *usuario* por *postgres* se ac
 
 ![Imagen2](/img/img2.png)
 
-
+***
 ## Uso de comandos útiles
+***
 
 Una vez realizada apropiadamente la instalación y accedido al programa **psql** se procederá a detallar con claridad algunos de los comandos que permite utilizar PostgreSQL.
 
-### -> Creación de un usuario:
+***
+### Creación de un usuario
+***
 
 Desde un primer momento, en la instalación de PostgreSQL, se crea en el sistema el superusuario **postgre**. Con él, se pueden crear además diferentes usuarios. Para crear un usuario se hace uso del siguiente comando: 
 
@@ -68,7 +84,41 @@ DROP USER <nombre>;
 
 ![imagen6](/img/img6.png)
 
-# -> Otros comandos útiles
+***
+### Creación de Bases de datos y tablas
+***
+
+Después de conocer los pasos para la creación de usuarios, es de importancia conocer cuáles son los procedimientos llevados a cabo para la creación de las bases de datos, con sus respectivas tablas. En primer lugar, se procede a crear una base de datos, utilizando el siguiente comando: 
+
+```CREATE DATABASE <nombre_bd>```
+
+Donde se sustituirá **nombre_db** por el nombre que identificará a la base de datos deseada. Esta base de datos por defecto se encontrará vacía, es por ello que para crear las tablas correspondientes a la misma será necesario seleccionar previamente la base de datos deseada. Para ello, se hace uso del comando: 
+
+```\c <nombre_db>```
+
+El cuál seleccionará la base de datos indicada, pudiendo así hacer cambios sobre la misma. Ahora, es momento de crear la primera tabla de la base de datos, para ello: 
+
+```
+CREATE TABLE <nombre_tabla> (
+    <nombre_atributo> <tipo_atributo>
+    . . .
+    . . .
+
+);
+```
+
+Por último, será necesario insertar las tuplas que complementarán la tabla. PAra realizar esta tarea se hace uso de las sentencias: 
+
+```
+INSERT INTO <nombre_tabla>(<columna1>, <columna2>, ...) VALUES (<valor1>, <valor2>, ...);
+```
+
+Un ejemplo más detallado de esto se podrá ver en el apartado [Ejemplo de pruebas](#ejemplo-de-pruebas).
+
+
+***
+### Otros comandos útiles
+***
 
 A continuación se detallarán una serie de comandos que pueden resultar de utilidad en el uso de PosgreSQL.
 
@@ -76,22 +126,45 @@ A continuación se detallarán una serie de comandos que pueden resultar de util
 
 ![imagen8](/img/img8.png)
 
- - Conectar a una base de datos: 
+ - Conectar a una base de datos: Se puede conectar a una base de datos a través del siguiente comando:  
+
+ ```\c <nombre_basededatos>```
+
+![imagen20](/img/img20.png)
+ 
+ Esto permitirá poder acceder a las tablas de la misma, así como realizar los cambios pertinentes en la composición de la Base de Datos. Además, se puede especificar un usuario para acceder a la misma con él. 
 
  - Listar las tablas en la base de datos actual: 
 
+ Dentro de una base de datos, se puede listar todas las tablas que la componen, de la siguiente manera: 
+
+ ```\dt```
+
+ ![img20](/img/img21.png)
+
  - Comando para la ayuda: 
 
- - Comando para la ayuda (2): 
+El comando ```\?``` proporcionará un listado de los comandos de psql, con una breve descripción del mismo. Se podrá ver a continuación una pequeña parte de lo que muestra por la terminal: 
+
+![img22](/img/img22.png)
+
+Además, existe el comando ```\h <comando>``` que proporcionará una ayuda detallada del comando que se le proporcione, como por ejemplo: 
+
+![img23](/img/img23.png)
 
  - Grabar el histórico de comandos:
 
+ Para grabar el histórico de comandos se usará la sentencia: ```\s```
+
  - Ejecutar comandos desde un fichero:
 
- - Salir: 
+ Con el comando ```\i <ruta_fichero>``` se podrán ejecutar scripts.
 
+ - Salir: ```\q```
 
+***
 ## Ejemplo de pruebas
+***
 
 Después de esta introducción a PosgreSQL, se va a proponer un pequeño ejemplo de creación de bases de datos y tablas, así como inserciones de valores en las mismas. 
 
@@ -142,10 +215,18 @@ Y para mostrar el contenido de la tabla, haciendo uso de SQL:
 
 ![imagen13](/img/img12.png)
 
+***
 ## Referencias
+***
 
 1. [Cheat Sheet Markdown](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
 
 2. [¿Qué es PostgreSQL?](https://ayudaleyprotecciondatos.es/bases-de-datos/que-es-postgresql-ventajas/)
 
 3. [Enlace Wikipedia Michael Stonebraker](https://es.wikipedia.org/wiki/Michael_Stonebraker)
+
+4. [Insert PSQL](https://www.postgresqltutorial.com/postgresql-insert/)
+
+5. [Commonly used commands PSQL](http://postgresguide.com/utilities/psql.html)
+
+[VOLVER AL INICIO](#indice)
